@@ -1,7 +1,16 @@
 doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+html(lang='zh')
+  include ./includes/header.jade
   body
+    header
+      h1= title
+    nav
+      span
+        a(title='主页', href='/') home
+      sapn
+        a(title='登陆', href='/login') login
+      span
+        a(title='注册', href='/reg') register
+
     block content
+    include ./includes/footer.jade
