@@ -31,11 +31,15 @@ User.prototype.save = function(callback) {
   });
 };
 
-Uesr.get = function (name, callback) {
+User.get = function (name, callback) {
   getMongoConn(function (error, db) {
     if (error) return callback(error);
     db.collection('users', function (error, collection) {
-
+      if (error) return callback(error);
+      collection.findOne({ name: name }, function (error, user) {
+        if (error) return callback(error);
+        callback(null, user);
+      });
     });
   });
 };

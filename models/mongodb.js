@@ -1,7 +1,7 @@
 var config = require('../settings').mongodb;
 var MongoClient = require('mongodb').MongoClient;
 
-module.exports = mongodb;
+var mongodb = module.exports;
 
 mongodb.getMongoConn = function (callback) {
   var url = 'mongodb://' + config.host + ':' + config.port + '/' + config.dbname;
