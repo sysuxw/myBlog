@@ -1,0 +1,13 @@
+extends layout
+block content
+  form(method='post')
+
+    |标题：
+    input(type='text', name='title')
+    br
+
+    |正文：
+    textarea(name='content', rows='20', cols='100')
+    br
+
+    input(type='submit' value='发表')

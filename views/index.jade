@@ -1,4 +1,12 @@
 extends layout
 
 block content
-  p 这是主页
+  each post in posts
+    p
+      h2
+        a(href='#')= post.title
+    p.info
+      | 作者：
+      a(href='#')= post.name
+      | | 日期：#{post.createTime.minute}
+    p!= post.content

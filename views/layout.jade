@@ -7,10 +7,23 @@ html(lang='zh')
     nav
       span
         a(title='主页', href='/') home
-      sapn
-        a(title='登陆', href='/login') login
-      span
-        a(title='注册', href='/reg') register
-
-    block content
+      if user
+        span
+          a(title='上传', href='upload') upload
+        span
+          a(title='发表', href='/post') post
+        span
+          a(title='登出', href='/logout') logout
+      else
+        sapn
+          a(title='登陆', href='/login') login
+        span
+          a(title='注册', href='/reg') register
+    article
+      if success
+        div= success
+      if error
+        div= error
+      br
+      block content
     include ./includes/footer.jade
