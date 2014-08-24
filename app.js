@@ -26,6 +26,8 @@ app.use(session({
   secret: settings.cookieSecret,
   name: settings.mongodb.dbname,// formerly known as key
   cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 },// 30days
+  resave: true,
+  saveUninitialized: true,
   store: new MongoStore({
     db: settings.mongodb.dbname
   })

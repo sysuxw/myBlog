@@ -45,7 +45,7 @@ Post.prototype.save = function(callback) {
   });
 };
 
-Post.get = function (name, callback) {
+Post.getAll = function (name, callback) {
   getMongoConn(function (error, db) {
     if (error) return callback(error);
 
@@ -63,6 +63,47 @@ Post.get = function (name, callback) {
           doc.content = markdown.toHTML(doc.content);
         });
         callback(null, docs);
+      });
+    });
+  });
+};
+
+Post.getOne = function (query, callback) {
+  getMongoConn(function (error, db) {
+    if (error) return callback(error);
+    db.collection('posts', function (error, collection) {
+      if (error) return callback(error);
+      collection.findOne(query, function (error, doc) {
+        if (error) return callback(error);
+        doc.content = markdown.toHTML(doc.content);
+        callback(null, doc);
+      });
+    });
+  });
+};
+
+// 返回原始的markdown格式
+Post.edit = function (query, callback) {
+  getMongoConn(function (error, db) {
+    if (error) return callback(error);
+    db.collection('posts', function (error, collection) {
+      if (error) return callback(error);
+      collection.findOne(query, function (error, doc) {
+        if (error) return callback(error);
+        callback(null, doc);
+      });
+    });
+  });
+};
+
+Post.update = function (query, option, callback) {
+  getMongoConn(function (error, db) {
+    if (error) return callback(error);
+    db.collection('posts', function (error, collection) {
+      if (error) return callback(error);
+      collection.update(query, option, function (error) {
+        if (error) return callback(error);
+        callback(null);
       });
     });
   });
