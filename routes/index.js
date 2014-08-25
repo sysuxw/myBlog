@@ -5,6 +5,7 @@ var userModel = require('../models/user');
 var postModel = require('../models/post');
 var checkNotLogin = require('../middlewares').checkNotLogin;
 var checkLogin = require('../middlewares').checkLogin;
+var path = require("path");
 
 module.exports = function (app) {
   app.get('/', function (req, res, next) {
@@ -148,13 +149,13 @@ module.exports = function (app) {
           fs.unlinkSync(files[i].path);
           console.log('Successfully removed an empty file!');
         } else {
-          var target_path = '../public/images/' + files[i].name;
+          var target_path = path.normalize(__dirname + '/../public/images/' + files[i].name);
           fs.renameSync(files[i].path, target_path);
           console.log('Successfully renamed a file!');
         }
       }
       req.flash('success', '文件上传成功！');
-      req.redirect('/upload');
+      res.redirect('/upload');
     });
   });
 
