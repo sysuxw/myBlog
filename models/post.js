@@ -96,15 +96,19 @@ Post.edit = function (query, callback) {
   });
 };
 
-Post.update = function (query, option, callback) {
+Post.update = function (query, options, callback) {
   getMongoConn(function (error, db) {
     if (error) return callback(error);
     db.collection('posts', function (error, collection) {
       if (error) return callback(error);
-      collection.update(query, option, function (error) {
+      collection.update(query, options, function (error) {
         if (error) return callback(error);
         callback(null);
       });
     });
   });
 };
+
+Post.remove = function (name, ) {
+  // body...
+}
