@@ -115,3 +115,12 @@ exports.upload = function (req, res, next) {
     res.redirect('/upload');
   });
 };
+
+exports.parseName = function (req, res, next, name) {
+  userModel.get(name, function (error, user) {
+    if (error) return next(error);
+    if (!user) res.status(404).send('用户不存在');
+    req.user = user;
+    next();
+  });
+};

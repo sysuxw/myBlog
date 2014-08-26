@@ -110,5 +110,5 @@ Post.update = function (query, options, callback) {
 };
 
 Post.remove = function (name, ) {
-  // body...
-}
+
+};
